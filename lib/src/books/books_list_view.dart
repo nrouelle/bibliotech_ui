@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ma_biblio/src/books/books_service.dart';
-import 'package:ma_biblio/src/settings/settings_view.dart';
 import 'book.dart';
 import 'books_controller.dart';
 
@@ -27,29 +26,6 @@ class _MyBookListViewState extends State<BookListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Ma bibliotheque'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.library_books),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, BookListView.routeName);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
-            ),
-          ],
-        ),
         body: Center(
             child: FutureBuilder<List<Book>>(
                 future: controller.loadBooks(),

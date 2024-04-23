@@ -8,7 +8,7 @@ class BooksService {
     final List<Book> bookList;
 
     bookList = const [
-      Book('Letoile du désert', 'Harry Bosch', '2024', true),
+      Book('L\'etoile du désert', 'Harry Bosch', '2024', true),
       Book('Noise', 'Daniel Kanheman', '2024', false)
     ];
     return bookList;

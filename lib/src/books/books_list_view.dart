@@ -23,7 +23,6 @@ class _MyBookListViewState extends State<BookListView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     futureBooks = controller.loadBooks();
   }
@@ -58,12 +57,20 @@ class _MyBookListViewState extends State<BookListView> {
             child: FutureBuilder<List<Book>>(
                 future: futureBooks,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData &&
+                  List<Book>? books = snapshot.data;
+                  if (books != null &&
                       snapshot.connectionState == ConnectionState.done) {
                     return ListView.builder(
-                      itemCount: snapshot.data!.length,
+                      itemCount: books!.length,
                       itemBuilder: (context, index) {
-                        return Text(snapshot.data?[index].title ?? "got null");
+                        Book book = books[index];
+                        return BookItem(
+                          title: book.title,
+                          author: book.author,
+                          read: (book.read
+                              ? Colors.green[900]
+                              : Colors.grey[300]),
+                        );
                       },
                     );
                   }
@@ -86,24 +93,35 @@ class BookItem extends StatelessWidget {
 
   final String title;
   final String author;
-  final Bool read;
+  final Color? read;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(12),
       child: Row(
         children: [
           Icon(
             Icons.book,
             color: Colors.blue[300],
           ),
-          // Text
-          const Text('toto'),
+          Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
+                      Text(author),
+                    ],
+                  ))),
           // Icon read
           Icon(
             Icons.check_circle,
-            color: Colors.green[600],
+            color: read,
           ),
         ],
       ),

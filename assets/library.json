@@ -1,0 +1,244 @@
+{
+  "library": [
+    {
+      "id": "1",
+      "title": "La femme surdouée",
+      "author": "Monique de Kermadec",
+      "year": "2020"
+    },
+    {
+      "id": "2",
+      "title": "La lettre d'amour interdite",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "3",
+      "title": "Les 7 sœurs- T1",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "4",
+      "title": "La sœur de la tempête- T2",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "5",
+      "title": "La sœur de l'ombre- T3",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "6",
+      "title": "La sœur à la perle- T4",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "7",
+      "title": "La Sœur de la Lune- T5",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "8",
+      "title": "La sœur du soleil- T6",
+      "author": "Lucinda Riley",
+      "year": "2020"
+    },
+    {
+      "id": "9",
+      "title": "The Last Kingdom- T1",
+      "author": "Bernard Cornwell",
+      "year": "2021"
+    },
+    {
+      "id": "10",
+      "title": "The Pale Horseman- T2",
+      "author": "Bernard Cornwell",
+      "year": "2021"
+    },
+    {
+      "id": "11",
+      "title": "The Lords of the North- T3",
+      "author": "Bernard Cornwell",
+      "year": "2021"
+    },
+    {
+      "id": "12",
+      "title": "Sword Song- T4",
+      "author": "Bernard Cornwell",
+      "year": "2021"
+    },
+    {
+      "id": "13",
+      "title": "The Burning Land- T5",
+      "author": "Bernard Cornwell",
+      "year": "2021"
+    },
+    {
+      "id": "14",
+      "title": "La Sœur disparue- T7",
+      "author": "Lucinda Riley",
+      "year": "2021"
+    },
+    {
+      "id": "15",
+      "title": "Le cerf-volant",
+      "author": "Laetitia Colombani",
+      "year": "2021"
+    },
+    {
+      "id": "16",
+      "title": "Death of Kings- T6",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "17",
+      "title": "The Pagan Lord- T7",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "18",
+      "title": "The Empty Throne- T8",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "19",
+      "title": "Warriors of the Storm- T9",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "20",
+      "title": "The Flame Bearer- T10",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "21",
+      "title": "War of the Wolf- T11",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "22",
+      "title": "Sword of Kings- T12",
+      "author": "Bernard Cornwell",
+      "year": "2022"
+    },
+    {
+      "id": "23",
+      "title": "C'est arrivé la nuit",
+      "author": "Marc Levy",
+      "year": "2023"
+    },
+    {
+      "id": "24",
+      "title": "Coup de pelle",
+      "author": "Alice Pol",
+      "year": "2023"
+    },
+    {
+      "id": "25",
+      "title": "La décision",
+      "author": "Karine Tuil",
+      "year": "2023"
+    },
+    {
+      "id": "26",
+      "title": "La rivière",
+      "author": "Peter Heller",
+      "year": "2023"
+    },
+    {
+      "id": "27",
+      "title": "Lame de fond",
+      "author": "Chris Constantinople",
+      "year": "2023"
+    },
+    {
+      "id": "28",
+      "title": "Le crépuscule des fauves",
+      "author": "Marc Levy",
+      "year": "2023"
+    },
+    {
+      "id": "29",
+      "title": "Un crime parfait",
+      "author": "Sebastien Theveny",
+      "year": "2023"
+    },
+    {
+      "id": "30",
+      "title": "Un matin sur la terre",
+      "author": "Christian Signol",
+      "year": "2023"
+    },
+    {
+      "id": "31",
+      "title": "Trente secondes avant de mourir",
+      "author": "Sébastien Theveny",
+      "year": "2023"
+    },
+    {
+      "id": "32",
+      "title": "Les disparues de Louisiane",
+      "author": "Alexis Aubenque",
+      "year": "2023"
+    },
+    {
+      "id": "33",
+      "title": "Dans les brumes de Capelans",
+      "author": "Olivier Norek",
+      "year": "2024"
+    },
+    {
+      "id": "34",
+      "title": "Police",
+      "author": "Jo Nesbo",
+      "year": "2024"
+    },
+    {
+      "id": "35",
+      "title": "Le festin",
+      "author": "Margaret Kennedy",
+      "year": "2024"
+    },
+    {
+      "id": "36",
+      "title": "Entre deux mondes",
+      "author": "Olivier Norek",
+      "year": "2024"
+    },
+    {
+      "id": "37",
+      "title": "L'étoile du désert",
+      "author": "Mickael Connely",
+      "year": "2024"
+    },
+    {
+      "id": "38",
+      "title": "Par le feu et par le sang",
+      "author": "Isabelle Pons",
+      "year": "2024"
+    },
+    {
+      "id": "39",
+      "title": "La Rose de Minuit",
+      "author": "Lucinda Riley",
+      "year": "2024"
+    },
+    {
+      "id": "40",
+      "title": "Eclipse totale",
+      "author": "Jo Nesbo",
+      "year": "2024"
+    }
+  ]
+}

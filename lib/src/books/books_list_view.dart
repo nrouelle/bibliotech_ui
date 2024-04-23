@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:ma_biblio/src/books/books_service.dart';
 import 'package:ma_biblio/src/settings/settings_view.dart';
 import 'book.dart';
@@ -55,7 +52,7 @@ class _MyBookListViewState extends State<BookListView> {
         ),
         body: Center(
             child: FutureBuilder<List<Book>>(
-                future: futureBooks,
+                future: controller.loadBooks(),
                 builder: (context, snapshot) {
                   List<Book>? books = snapshot.data;
                   if (books != null &&
@@ -107,7 +104,7 @@ class BookItem extends StatelessWidget {
           ),
           Expanded(
               child: Padding(
-                  padding: const EdgeInsets.only(left: 12),
+                  padding: const EdgeInsets.only(left: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

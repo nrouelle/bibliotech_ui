@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ma_biblio/src/books/books_add_view.dart';
 import 'package:ma_biblio/src/home/home_view.dart';
 import 'books/books_controller.dart';
 import 'books/books_list_view.dart';
@@ -78,6 +79,8 @@ class MyApp extends StatelessWidget {
                     return const SampleItemDetailsView();
                   case BookListView.routeName:
                     return const BookListView();
+                  case BookAddView.routeName:
+                    return const BookAddView();
                   default:
                     return const HomeView();
                 }

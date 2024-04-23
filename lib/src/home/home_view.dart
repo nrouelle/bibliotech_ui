@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ma_biblio/src/books/books_add_view.dart';
 import 'package:ma_biblio/src/settings/settings_view.dart';
 
 import 'package:ma_biblio/src/books/books_list_view.dart';
@@ -16,6 +17,7 @@ class _HomeViewState extends State<HomeView> {
   static const List<Widget> _pages = <Widget>[
     CurrentBook(),
     BookListView(),
+    BookAddView(),
     About()
   ];
 
@@ -46,12 +48,15 @@ class _HomeViewState extends State<HomeView> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
           BottomNavigationBarItem(
               icon: Icon(Icons.library_books), label: 'Bibliothèque'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_right), label: 'Plus tard'),
+              icon: Icon(Icons.add_circle), label: 'Nouveau'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.arrow_right), label: 'A propos'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

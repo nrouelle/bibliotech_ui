@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ma_biblio/src/books/books_detail_view.dart';
 import 'package:ma_biblio/src/books/books_service.dart';
 import 'book.dart';
 import 'books_controller.dart';
@@ -37,12 +38,20 @@ class _MyBookListViewState extends State<BookListView> {
                       itemCount: books.length,
                       itemBuilder: (context, index) {
                         Book book = books[index];
-                        return BookItem(
-                          title: book.title,
-                          author: book.author,
-                          read: (book.read
-                              ? Colors.green[900]
-                              : Colors.grey[300]),
+                        return GestureDetector(
+                          child: BookItem(
+                            title: book.title,
+                            author: book.author,
+                          ),
+                          onTap: () {
+                            // push navigation to details
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      BooksDetailView(book: books[index])),
+                            );
+                          },
                         );
                       },
                     );
@@ -57,16 +66,10 @@ class _MyBookListViewState extends State<BookListView> {
 }
 
 class BookItem extends StatelessWidget {
-  const BookItem({
-    super.key,
-    required this.title,
-    required this.author,
-    required this.read,
-  });
+  const BookItem({super.key, required this.title, required this.author});
 
   final String title;
   final String author;
-  final Color? read;
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +77,6 @@ class BookItem extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Row(
         children: [
-          Icon(
-            Icons.book,
-            color: Colors.blue[300],
-          ),
           Expanded(
               child: Padding(
                   padding: const EdgeInsets.only(left: 8),
@@ -86,16 +85,12 @@ class BookItem extends StatelessWidget {
                     children: [
                       Text(title,
                           style: const TextStyle(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           )),
-                      Text(author),
+                      Text(author, style: const TextStyle(fontSize: 14)),
                     ],
                   ))),
-          // Icon read
-          Icon(
-            Icons.check_circle,
-            color: read,
-          ),
         ],
       ),
     );

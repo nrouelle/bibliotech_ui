@@ -239,6 +239,18 @@
       "title": "Eclipse totale",
       "author": "Jo Nesbo",
       "year": "2024"
+    },
+    {
+      "id": "41",
+      "title": "Meurtre au champagne",
+      "author": "Sébastien Theveny",
+      "year": "2024"
     }
-  ]
+  ],
+  "en_cours": {
+    "id": "41",
+    "title": "Meurtre au champagne",
+    "author": "Sébastien Theveny",
+    "year": "2024"
+  }
 }

@@ -34,7 +34,7 @@ class _MyBookListViewState extends State<BookListView> {
                   if (books != null &&
                       snapshot.connectionState == ConnectionState.done) {
                     return ListView.builder(
-                      itemCount: books!.length,
+                      itemCount: books.length,
                       itemBuilder: (context, index) {
                         Book book = books[index];
                         return BookItem(
@@ -50,7 +50,7 @@ class _MyBookListViewState extends State<BookListView> {
 
                   /// handles others as you did on question
                   else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 })));
   }

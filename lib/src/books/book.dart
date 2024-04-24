@@ -10,4 +10,7 @@ class Book {
     return Book(json['title'] as String, json['author'] as String,
         json['year'] as String, true);
   }
+
+  Map<String, dynamic> toJson() =>
+      {'title': title, 'author': author, 'year': year, 'read': true};
 }

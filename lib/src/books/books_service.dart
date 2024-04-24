@@ -16,10 +16,11 @@ class BooksService {
     return bookList;
   }
 
-  Future<void> addBook(String title, String author, String year) async {
+  Future<void> addBook(
+      String title, String author, String year, bool read) async {
     final file = await _localFile;
     var library = await getBooks();
-    var newBook = Book(title, author, DateTime.now().year.toString(), false);
+    var newBook = Book(title, author, DateTime.now().year.toString(), read);
     library.add(newBook);
 
     var jsonLibrary = jsonEncode(library);

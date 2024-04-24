@@ -15,7 +15,8 @@ class BooksController {
     return _booksList;
   }
 
-  Future<void> saveLibrary(String title, String author, String year) async {
-    await _booksService.addBook(title, author, year);
+  Future<void> saveLibrary(
+      String title, String author, String year, bool read) async {
+    await _booksService.addBook(title, author, year, read);
   }
 }

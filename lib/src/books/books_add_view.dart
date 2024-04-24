@@ -22,6 +22,7 @@ class BookAddForm extends State<BookAddView> {
   String title = '';
   String author = '';
   String year = '';
+  bool read = false;
   TextEditingController dateInput = TextEditingController();
 
   @override
@@ -32,7 +33,7 @@ class BookAddForm extends State<BookAddView> {
   }
 
   void saveBook() {
-    controller.saveLibrary(title, author, year);
+    controller.saveLibrary(title, author, year, read);
   }
 
   Future _selectDate() async {
@@ -88,6 +89,19 @@ class BookAddForm extends State<BookAddView> {
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Année de lecture'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Text('Livre déjà lu ? '),
+                  Switch(
+                      value: read,
+                      onChanged: (bool value) {
+                        setState(() {
+                          read = value;
+                        });
+                      }),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),

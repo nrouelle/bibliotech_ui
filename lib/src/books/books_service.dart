@@ -7,12 +7,14 @@ import 'package:ma_biblio/src/books/book.dart';
 
 class BooksService {
   Future<List<Book>> getBooks() async {
-    List<Book> bookList;
+    List<Book> bookList = [];
 
-    var file = await _localFile;
-    String jsonLibrary = await file.readAsString();
-    var rest = json.decode(jsonLibrary) as List;
-    bookList = rest.map<Book>((bookJson) => Book.fromJson(bookJson)).toList();
+    try {
+      var file = await _localFile;
+      String jsonLibrary = await file.readAsString();
+      var rest = json.decode(jsonLibrary) as List;
+      bookList = rest.map<Book>((bookJson) => Book.fromJson(bookJson)).toList();
+    } on Exception catch (ex) {}
     return bookList;
   }
 
@@ -35,6 +37,11 @@ class BooksService {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/myLib.json');
+    var file = File('$path/myLib.json');
+    bool doesFileExists = await file.exists();
+    if (!doesFileExists) {
+      file.create();
+    }
+    return file;
   }
 }

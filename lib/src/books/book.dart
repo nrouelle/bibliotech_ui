@@ -8,7 +8,7 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(json['title'] as String, json['author'] as String,
-        json['year'] as String, true);
+        json['year'] as String, json['read'] as bool);
   }
 
   Map<String, dynamic> toJson() =>

@@ -34,6 +34,15 @@ class _HomeViewState extends State<HomeView> {
         title: const Text('Mes lectures'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              // Navigate to the settings page. If the user leaves and returns
+              // to the app after it has been killed while running in the
+              // background, the navigation stack is restored.
+              Navigator.pushNamed(context, BookAddView.routeName);
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
               // Navigate to the settings page. If the user leaves and returns
@@ -54,9 +63,7 @@ class _HomeViewState extends State<HomeView> {
           BottomNavigationBarItem(
               icon: Icon(Icons.library_books), label: 'Bibliothèque'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle), label: 'Nouveau'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_right), label: 'A propos'),
+              icon: Icon(Icons.search), label: 'Rechercher'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ma_biblio/src/books/books_controller.dart';
-import 'package:ma_biblio/src/books/books_list_view.dart';
 import 'package:ma_biblio/src/books/books_service.dart';
-import 'package:ma_biblio/src/home/home_view.dart';
 
 class BookAddView extends StatefulWidget {
   const BookAddView({super.key});
@@ -39,9 +37,9 @@ class BookAddForm extends State<BookAddView> {
   Future _selectDate() async {
     DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: new DateTime.now(),
-        firstDate: new DateTime(2016),
-        lastDate: new DateTime(2026));
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2016),
+        lastDate: DateTime(2026));
     if (picked != null) setState(() => dateInput.text = picked.year.toString());
   }
 
@@ -49,80 +47,94 @@ class BookAddForm extends State<BookAddView> {
   Widget build(BuildContext context) {
     return Form(
       key: _addFormKey,
-      child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Center(
-              child: Column(
-            children: [
-              TextFormField(
-                onSaved: (value) {
-                  title = value as String;
-                },
-                decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Entrez le titre du livre'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez indiquer le titre du livre';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                onSaved: (value) {
-                  author = value as String;
-                },
-                decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Entrez l\'auteur du livre'),
-              ),
-              TextFormField(
-                controller: dateInput,
-                readOnly: true,
-                onSaved: (value) {
-                  year = value as String;
-                },
-                onTap: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  _selectDate();
-                },
-                decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Année de lecture'),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Text('Livre déjà lu ? '),
-                  Switch(
-                      value: read,
-                      onChanged: (bool value) {
-                        setState(() {
-                          read = value;
-                        });
-                      }),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
-                      if (_addFormKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        _addFormKey.currentState?.save();
-                        saveBook();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                        Navigator.pushNamed(context, '/');
-                      }
-                    },
-                    child: const Text('Ajouter')),
-              ),
-            ],
-          ))),
+      child: Scaffold(
+        body: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  onSaved: (value) {
+                    title = value as String;
+                  },
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Entrez le titre du livre'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez indiquer le titre du livre';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  onSaved: (value) {
+                    author = value as String;
+                  },
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Entrez l\'auteur du livre'),
+                ),
+                TextFormField(
+                  controller: dateInput,
+                  readOnly: true,
+                  onSaved: (value) {
+                    year = value as String;
+                  },
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    _selectDate();
+                  },
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Année de lecture'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text('Livre déjà lu ? '),
+                    Switch(
+                        value: read,
+                        onChanged: (bool value) {
+                          setState(() {
+                            read = value;
+                          });
+                        }),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, or false otherwise.
+                            if (_addFormKey.currentState!.validate()) {
+                              // If the form is valid, display a snackbar. In the real world,
+                              // you'd often call a server or save the information in a database.
+                              _addFormKey.currentState?.save();
+                              saveBook();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Processing Data')),
+                              );
+                              Navigator.pushNamed(context, '/');
+                            }
+                          },
+                          child: const Text('Ajouter')),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Annuler')),
+                    ],
+                  ),
+                ),
+              ],
+            ))),
+      ),
     );
   }
 }

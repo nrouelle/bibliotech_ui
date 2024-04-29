@@ -12,61 +12,88 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _pages = <Widget>[
-    CurrentBook(),
-    BookListView(),
-    BookAddView(),
-    About()
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mes lectures'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // Navigate to the settings page. If the user leaves and returns
-              // to the app after it has been killed while running in the
-              // background, the navigation stack is restored.
-              Navigator.pushNamed(context, BookAddView.routeName);
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              // Navigate to the settings page. If the user leaves and returns
-              // to the app after it has been killed while running in the
-              // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
-            },
-          ),
-        ],
+      backgroundColor: Colors.grey[100],
+      body: Column(
+        children: [const Header()],
       ),
-      body: Center(
-        child: _pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.library_books), label: 'Bibliothèque'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search), label: 'Rechercher'),
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+      alignment: Alignment.center,
+      height: 170,
+      decoration: BoxDecoration(color: Colors.blue.shade600),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "BiblioTech",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Mes lectures",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
+          Row(children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.black.withOpacity(.1),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.search,
+                  size: 28,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.black.withOpacity(.1),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.notifications,
+                  size: 28,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ]),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }

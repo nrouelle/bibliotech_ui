@@ -62,9 +62,15 @@ class MyApp extends StatelessWidget {
           // SettingsController to display the correct theme.
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            scaffoldBackgroundColor: Colors.blue.shade100,
+            scaffoldBackgroundColor: Colors.grey.shade100,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, foregroundColor: Colors.white),
+            ),
             floatingActionButtonTheme: const FloatingActionButtonThemeData(
                 backgroundColor: Colors.blue, foregroundColor: Colors.white),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                selectedIconTheme: IconThemeData(color: Colors.blue)),
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,

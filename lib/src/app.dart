@@ -60,7 +60,12 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Colors.blue.shade100,
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                backgroundColor: Colors.blue, foregroundColor: Colors.white),
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
@@ -88,3 +93,20 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// light Theme
+ThemeData lightThemeData(BuildContext context) {
+  return ThemeData.light().copyWith(
+      primaryColor: Colors.blue,
+      colorScheme: ColorScheme.fromSwatch(),
+      textTheme:
+          const TextTheme(titleLarge: TextStyle(fontWeight: FontWeight.bold)));
+}
+
+// // dark Theme
+// ThemeData darkThemeData(BuildContext context) {
+//   return ThemeData.dark().copyWith(
+//       primaryColor: Color(0xFFFF1D00),
+//       colorScheme:
+//           ColorScheme.fromSwatch().copyWith(secondary: Color(0xFF24A751)));
+// }

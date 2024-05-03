@@ -113,20 +113,19 @@ class _BookListState extends State<BookList> {
               itemBuilder: (context, index) {
                 Book book = books[index];
                 return GestureDetector(
-                  child: BookItem(
-                    title: book.title,
-                    author: book.author,
-                  ),
-                  onTap: () {
-                    // push navigation to details
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              BooksDetailView(book: books[index])),
-                    );
-                  },
-                );
+                    child: BookItem(
+                      title: book.title,
+                      author: book.author,
+                    ),
+                    onTap: () {
+                      // push navigation to details
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BooksDetailView(book: books[index])),
+                      );
+                    });
               },
             );
           }

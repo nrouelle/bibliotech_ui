@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -63,6 +65,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
             scaffoldBackgroundColor: Colors.grey.shade100,
+            textTheme:
+                const TextTheme(titleLarge: TextStyle(color: Colors.black)),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, foregroundColor: Colors.white),
@@ -105,8 +109,9 @@ ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: Colors.blue,
       colorScheme: ColorScheme.fromSwatch(),
-      textTheme:
-          const TextTheme(titleLarge: TextStyle(fontWeight: FontWeight.bold)));
+      textTheme: const TextTheme(
+          titleLarge:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.black)));
 }
 
 // // dark Theme

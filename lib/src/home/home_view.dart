@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ma_biblio/src/books/books_add_view.dart';
+import 'package:ma_biblio/src/books/books_list_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -9,141 +9,217 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  double availableScreenWidth = 0;
   int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      body: <Widget>[const HomeWidget(), const BookListView()][selectedIndex],
+      bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          selectedIndex: selectedIndex,
+          indicatorColor: Colors.blue[100],
+          destinations: const <Widget>[
+            NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
+            NavigationDestination(
+                icon: Icon(Icons.library_books), label: 'Bibliothèque'),
+            NavigationDestination(icon: Icon(Icons.search), label: 'Recherche'),
+          ]),
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+      alignment: Alignment.center,
+      height: 170,
+      decoration: BoxDecoration(color: Colors.blue.shade600),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "BiblioTech",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Mes lectures",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
+          Row(children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.black.withOpacity(.1),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.search,
+                  size: 28,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.black.withOpacity(.1),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.notifications,
+                  size: 28,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ]),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeWidget extends StatefulWidget {
+  const HomeWidget({super.key});
+
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  double availableScreenWidth = 0;
 
   @override
   Widget build(BuildContext context) {
     availableScreenWidth = MediaQuery.of(context).size.width - 50;
 
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Column(
-        children: [
-          const Header(),
-          const SizedBox(
-            height: 25,
+    return Column(
+      children: [
+        const Header(),
+        const SizedBox(
+          height: 25,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            RichText(
+                text: TextSpan(
+                    text: "Livres",
+                    style: Theme.of(context).textTheme.titleLarge,
+                    children: [
+                  TextSpan(
+                      text: "7/50",
+                      style: Theme.of(context).textTheme.labelMedium)
+                ])),
+            const Text("Upgrade",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue)),
+          ]),
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Row(
+            children: [
+              buildBookNumberChart("Lu", Colors.blue, .3),
+              const SizedBox(
+                width: 2,
+              ),
+              buildBookNumberChart("Non Lu", Colors.orange, .25),
+              const SizedBox(
+                width: 2,
+              ),
+              buildBookNumberChart(
+                  "Pour plus tard", Colors.yellow.shade600, .20)
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                      text: TextSpan(
-                          text: "Livres",
-                          style: Theme.of(context).textTheme.titleLarge,
-                          children: [
-                        TextSpan(
-                            text: "7/50",
-                            style: Theme.of(context).textTheme.labelMedium)
-                      ])),
-                  const Text("Upgrade",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue)),
-                ]),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        const Divider(
+          height: 20,
+        ),
+        Expanded(
+            child: ListView(
+          padding: const EdgeInsets.all(25),
+          children: [
+            Text(
+              "Ajoutés récemment",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
               children: [
-                buildBookNumberChart("Lu", Colors.blue, .3),
-                const SizedBox(
-                  width: 2,
+                buildAddRecentlyList("Police", "Jo Nesbo"),
+                SizedBox(
+                  width: availableScreenWidth * .03,
                 ),
-                buildBookNumberChart("Non Lu", Colors.orange, .25),
-                const SizedBox(
-                  width: 2,
+                buildAddRecentlyList("Noise", "Daniel Hakehman"),
+                SizedBox(
+                  width: availableScreenWidth * .03,
                 ),
-                buildBookNumberChart(
-                    "Pour plus tard", Colors.yellow.shade600, .20)
+                buildAddRecentlyList(
+                    "Meurtre au champagne", "Sébastien Theveny"),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          const Divider(
-            height: 20,
-          ),
-          Expanded(
-              child: ListView(
-            padding: const EdgeInsets.all(25),
-            children: [
-              Text(
-                "Ajoutés récemment",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                  buildAddRecentlyList("Police", "Jo Nesbo"),
-                  SizedBox(
-                    width: availableScreenWidth * .03,
-                  ),
-                  buildAddRecentlyList("Noise", "Daniel Hakehman"),
-                  SizedBox(
-                    width: availableScreenWidth * .03,
-                  ),
-                  buildAddRecentlyList(
-                      "Meurtre au champagne", "Sébastien Theveny"),
-                ],
-              ),
-              const Divider(
-                height: 20,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Lecture en cours",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              buildBookRow('La rose de minuit'),
-              buildBookRow('L\'étoile du désert'),
-              buildBookRow('Le festin'),
-            ],
-          )),
-        ],
-      ),
-      floatingActionButton: Container(
-        decoration: const BoxDecoration(shape: BoxShape.circle, boxShadow: [
-          BoxShadow(color: Colors.white, spreadRadius: 7, blurRadius: 1)
-        ]),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const BookAddView())));
-          },
-          child: const Icon(Icons.add),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          currentIndex: selectedIndex,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.library_books), label: 'Accueil'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: 'Recherche'),
-          ]),
+            const Divider(
+              height: 20,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              "Lecture en cours",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            buildBookRow('La rose de minuit'),
+            buildBookRow('L\'étoile du désert'),
+            buildBookRow('Le festin'),
+          ],
+        )),
+      ],
     );
   }
 
@@ -225,99 +301,5 @@ class _HomeViewState extends State<HomeView> {
         ),
       ],
     );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-      alignment: Alignment.center,
-      height: 170,
-      decoration: BoxDecoration(color: Colors.blue.shade600),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "BiblioTech",
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                "Mes lectures",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-          Row(children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.black.withOpacity(.1),
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  size: 28,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.black.withOpacity(.1),
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.notifications,
-                  size: 28,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ]),
-        ],
-      ),
-    );
-  }
-}
-
-class CurrentBook extends StatelessWidget {
-  const CurrentBook({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('Livre en cours de lecture');
-  }
-}
-
-class About extends StatelessWidget {
-  const About({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('Page en attente !');
   }
 }

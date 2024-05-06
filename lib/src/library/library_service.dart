@@ -12,9 +12,23 @@ class LibraryService {
     try {
       var file = await _localFile;
       String jsonLibrary = await file.readAsString();
-      var rest = json.decode(jsonLibrary) as List;
-    } on Exception catch (ex) {}
+      Iterable list = json.decode(jsonLibrary);
+      bookList = List<Book>.from(list.map((book) => Book.fromJson(book)));
+    } on Exception catch (ex) {
+      rethrow;
+    }
     return bookList;
+  }
+
+  Future<void> addBook(
+      String title, String author, String year, bool read) async {
+    final file = await _localFile;
+    var library = await getBooks();
+    var newBook = Book(title, author, DateTime.now(), read);
+    library.add(newBook);
+
+    var jsonLibrary = jsonEncode(library);
+    file.writeAsString(jsonLibrary);
   }
 
   Future<String> get _localPath async {

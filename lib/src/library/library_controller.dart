@@ -17,6 +17,6 @@ class LibraryController {
 
   Future<void> saveLibrary(
       String title, String author, String year, bool read) async {
-    // await _libraryService.addBook(title, author, year, read);
+    await _libraryService.addBook(title, author, year, read);
   }
 }

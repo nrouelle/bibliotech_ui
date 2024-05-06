@@ -27,7 +27,7 @@ class BooksDetailView extends StatelessWidget {
                 book.author,
                 style: const TextStyle(fontSize: 18),
               ),
-              Text(book.year),
+              Text(book.readDate.toString()),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -22,7 +22,7 @@ class BooksService {
       String title, String author, String year, bool read) async {
     final file = await _localFile;
     var library = await getBooks();
-    var newBook = Book(title, author, DateTime.now().year.toString(), read);
+    var newBook = Book(title, author, DateTime.now(), read);
     library.add(newBook);
 
     var jsonLibrary = jsonEncode(library);

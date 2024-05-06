@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ma_biblio/src/books/books_controller.dart';
+import 'package:ma_biblio/src/library/library_controller.dart';
 import 'package:ma_biblio/src/books/books_service.dart';
 
 class BookAddView extends StatefulWidget {
@@ -15,7 +15,7 @@ class BookAddView extends StatefulWidget {
 
 class BookAddForm extends State<BookAddView> {
   final _addFormKey = GlobalKey<FormState>();
-  final BooksController controller = BooksController(BooksService());
+  // final LibraryController controller = LibraryController(BooksService());
 
   String title = '';
   String author = '';
@@ -31,7 +31,8 @@ class BookAddForm extends State<BookAddView> {
   }
 
   void saveBook() {
-    controller.saveLibrary(title, author, year, read);
+    // TODO : ne pas faire le save ici mais renvoyer la nouvelle instance vers la librairie
+    // controller.saveLibrary(title, author, year, read);
   }
 
   // Future _selectDate() async {

@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ma_biblio/src/books/books_add_view.dart';
 import 'package:ma_biblio/src/home/home_view.dart';
-import 'books/books_controller.dart';
-import 'books/books_list_view.dart';
+import 'library/library_controller.dart';
+import 'library/library_view.dart';
 
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
@@ -15,12 +15,12 @@ import 'settings/settings_view.dart';
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.booksController,
+    required this.libraryController,
     required this.settingsController,
   });
 
   final SettingsController settingsController;
-  final BooksController booksController;
+  final LibraryController libraryController;
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +63,17 @@ class MyApp extends StatelessWidget {
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
           theme: ThemeData(
-            primarySwatch: Colors.blue,
-            scaffoldBackgroundColor: Colors.grey.shade100,
-            textTheme:
-                const TextTheme(titleLarge: TextStyle(color: Colors.black)),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, foregroundColor: Colors.white),
-            ),
-            floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                backgroundColor: Colors.blue, foregroundColor: Colors.white),
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                selectedIconTheme: IconThemeData(color: Colors.blue)),
-          ),
+              primarySwatch: Colors.blue,
+              scaffoldBackgroundColor: Colors.grey.shade100,
+              textTheme:
+                  const TextTheme(titleLarge: TextStyle(color: Colors.black)),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white),
+              ),
+              navigationBarTheme:
+                  NavigationBarThemeData(backgroundColor: Colors.blue[300])),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 

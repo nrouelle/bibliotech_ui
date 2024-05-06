@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'src/books/books_controller.dart';
-import 'src/books/books_service.dart';
+import 'package:ma_biblio/src/library/library_service.dart';
+import 'src/library/library_controller.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -10,7 +10,7 @@ void main() async {
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
-  final booksController = BooksController(BooksService());
+  final libraryController = LibraryController(LibraryService());
 
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
@@ -21,6 +21,6 @@ void main() async {
   // SettingsView.
   runApp(MyApp(
     settingsController: settingsController,
-    booksController: booksController,
+    libraryController: libraryController,
   ));
 }

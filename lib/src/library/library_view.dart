@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'books_detail_view.dart';
-import 'books_service.dart';
+import '../books/books_detail_view.dart';
+import './library_service.dart';
 import 'book.dart';
-import 'books_controller.dart';
+import 'library_controller.dart';
 
 class BookListView extends StatefulWidget {
   const BookListView({super.key});
@@ -14,7 +14,7 @@ class BookListView extends StatefulWidget {
 }
 
 class _MyBookListViewState extends State<BookListView> {
-  final BooksController controller = BooksController(BooksService());
+  final LibraryController controller = LibraryController(LibraryService());
 
   late Future<List<Book>> futureBooks;
 
@@ -90,7 +90,7 @@ class BookList extends StatefulWidget {
 }
 
 class _BookListState extends State<BookList> {
-  final BooksController controller = BooksController(BooksService());
+  final LibraryController controller = LibraryController(LibraryService());
 
   late Future<List<Book>> futureBooks;
 

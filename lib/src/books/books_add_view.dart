@@ -97,7 +97,7 @@ class BookAddForm extends State<BookAddView> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Enregistré !')),
                               );
-                              Navigator.pop(context, '/');
+                              Navigator.of(context).pop(true);
                             }
                           },
                           child: const Text('Ajouter')),

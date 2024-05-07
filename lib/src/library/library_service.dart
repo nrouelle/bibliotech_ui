@@ -15,7 +15,7 @@ class LibraryService {
       Iterable list = json.decode(jsonLibrary);
       bookList = List<Book>.from(list.map((book) => Book.fromJson(book)));
     } on Exception catch (ex) {
-      rethrow;
+      throw Exception('Failed to load data');
     }
     return bookList;
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ma_biblio/src/library/library_service.dart';
+import 'package:ma_biblio/src/library_model.dart';
+import 'package:provider/provider.dart';
 import 'src/library/library_controller.dart';
 
 import 'src/app.dart';
@@ -19,8 +21,13 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(MyApp(
-    settingsController: settingsController,
-    libraryController: libraryController,
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LibraryModel(),
+      child: MyApp(
+        settingsController: settingsController,
+        libraryController: libraryController,
+      ),
+    ),
+  );
 }

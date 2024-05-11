@@ -9,9 +9,14 @@ import 'dart:convert';
 class LibraryModel extends ChangeNotifier {
   final List<Book> _books = [];
 
-  UnmodifiableListView<Book> get books => UnmodifiableListView(_books);
+  List<Book> get books => _books;
 
-  Future<void> loadJsonFile() async {
+  void add(Book book) {
+    _books.add(book);
+    notifyListeners();
+  }
+
+  Future<void> getLibrary() async {
     try {
       var file = await _localFile;
       String jsonLibrary = await file.readAsString();
@@ -41,10 +46,5 @@ class LibraryModel extends ChangeNotifier {
       file.create();
     }
     return file;
-  }
-
-  void addBook(Book book) {
-    _books.add(book);
-    notifyListeners();
   }
 }

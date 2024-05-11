@@ -22,9 +22,9 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
   runApp(
-    ChangeNotifierProvider(
+    ChangeNotifierProvider<LibraryModel>(
       create: (context) => LibraryModel(),
-      child: MyApp(
+      child: BiblioApp(
         settingsController: settingsController,
         libraryController: libraryController,
       ),

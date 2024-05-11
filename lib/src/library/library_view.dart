@@ -20,43 +20,44 @@ class _MyBookListViewState extends State<BookListView> {
   @override
   void initState() {
     super.initState();
-    LibraryModel().loadJsonFile();
+    retrieveLibraryData();
   }
-
-  // void _refreshData() {}
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LibraryModel>(builder: (context, library, child) {
-      return Column(
-        children: [
-          const LibraryHeader(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: library.books.length,
-              itemBuilder: (context, index) {
-                Book book = library.books[index];
-                return GestureDetector(
-                  child: BookItem(
-                    title: book.title,
-                    author: book.author,
-                  ),
-                  onTap: () {
-                    // push navigation to details
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              BooksDetailView(book: library.books[index])),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      );
-    });
+    return Column(
+      children: [
+        const LibraryHeader(),
+        Expanded(child: Consumer<LibraryModel>(
+          builder: (context, library, child) {
+            return ListView.builder(
+                itemCount: library.books.length,
+                itemBuilder: (context, index) {
+                  Book book = library.books[index];
+                  return GestureDetector(
+                    child: BookItem(
+                      title: book.title,
+                      author: book.author,
+                    ),
+                    onTap: () {
+                      // push navigation to details
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BooksDetailView(book: library.books[index])),
+                      );
+                    },
+                  );
+                });
+          },
+        )),
+      ],
+    );
+  }
+
+  void retrieveLibraryData() async {
+    await LibraryModel().getLibrary();
   }
 
   // @override

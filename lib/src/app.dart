@@ -12,8 +12,8 @@ import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
-class MyApp extends StatelessWidget {
-  const MyApp({
+class BiblioApp extends StatelessWidget {
+  const BiblioApp({
     super.key,
     required this.libraryController,
     required this.settingsController,
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     // The ListenableBuilder Widget listens to the SettingsController for changes.
     // Whenever the user updates their settings, the MaterialApp is rebuilt.
     return Consumer<LibraryModel>(builder: (context, library, child) {
-      library.loadJsonFile();
+      // library.loadJsonFile();
       return ListenableBuilder(
         listenable: settingsController,
         builder: (BuildContext context, Widget? child) {

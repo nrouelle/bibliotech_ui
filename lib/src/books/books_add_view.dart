@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ma_biblio/src/library/book.dart';
 import 'package:ma_biblio/src/library/library_controller.dart';
 import 'package:ma_biblio/src/library/library_service.dart';
+import 'package:ma_biblio/src/library_model.dart';
+import 'package:provider/provider.dart';
 
 class BookAddView extends StatefulWidget {
   const BookAddView({super.key});
@@ -15,7 +18,6 @@ class BookAddView extends StatefulWidget {
 
 class BookAddForm extends State<BookAddView> {
   final _addFormKey = GlobalKey<FormState>();
-  final LibraryController controller = LibraryController(LibraryService());
 
   String title = '';
   String author = '';
@@ -25,23 +27,8 @@ class BookAddForm extends State<BookAddView> {
 
   @override
   void initState() {
-    dateInput.text =
-        DateTime.now().year.toString(); //set the initial value of text field
     super.initState();
   }
-
-  void saveBook() {
-    controller.saveLibrary(title, author, '', false);
-  }
-
-  // Future _selectDate() async {
-  //   DateTime? picked = await showDatePicker(
-  //       context: context,
-  //       initialDate: DateTime.now(),
-  //       firstDate: DateTime(2016),
-  //       lastDate: DateTime(2026));
-  //   if (picked != null) setState(() => dateInput.text = picked.year.toString());
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,51 +45,55 @@ class BookAddForm extends State<BookAddView> {
                 key: _addFormKey,
                 child: Container(
                   padding: const EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextFormField(
-                        onSaved: (value) {
-                          title = value as String;
-                        },
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Entrez le titre du livre'),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Veuillez indiquer le titre du livre';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        onSaved: (value) {
-                          author = value as String;
-                        },
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Entrez l\'auteur du livre'),
-                      ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, or false otherwise.
-                            if (_addFormKey.currentState!.validate()) {
-                              // If the form is valid, display a snackbar. In the real world,
-                              // you'd often call a server or save the information in a database.
-                              _addFormKey.currentState?.save();
-
-                              saveBook();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Enregistré !')),
-                              );
-                              Navigator.of(context).pop(true);
-                            }
+                  child: Consumer<LibraryModel>(
+                      builder: (context, library, child) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextFormField(
+                          onSaved: (value) {
+                            title = value as String;
                           },
-                          child: const Text('Ajouter')),
-                    ],
-                  ),
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Entrez le titre du livre'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Veuillez indiquer le titre du livre';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          onSaved: (value) {
+                            author = value as String;
+                          },
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Entrez l\'auteur du livre'),
+                        ),
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                            onPressed: () {
+                              // Validate returns true if the form is valid, or false otherwise.
+                              if (_addFormKey.currentState!.validate()) {
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                _addFormKey.currentState?.save();
+
+                                library.add(Book(title, author, null, false));
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Enregistré !')),
+                                );
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: const Text('Ajouter')),
+                      ],
+                    );
+                  }),
                 ),
               ),
             ),

@@ -5,7 +5,6 @@ import 'package:ma_biblio/src/books/books_add_view.dart';
 import 'package:ma_biblio/src/home/home_view.dart';
 import 'package:ma_biblio/src/library_model.dart';
 import 'package:provider/provider.dart';
-import 'library/library_controller.dart';
 import 'library/library_view.dart';
 
 import 'settings/settings_controller.dart';
@@ -15,12 +14,10 @@ import 'settings/settings_view.dart';
 class BiblioApp extends StatelessWidget {
   const BiblioApp({
     super.key,
-    required this.libraryController,
     required this.settingsController,
   });
 
   final SettingsController settingsController;
-  final LibraryController libraryController;
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +85,8 @@ class BiblioApp extends StatelessWidget {
                   switch (routeSettings.name) {
                     case SettingsView.routeName:
                       return SettingsView(controller: settingsController);
-                    case BookListView.routeName:
-                      return const BookListView();
+                    case LibraryView.routeName:
+                      return const LibraryView();
                     case BookAddView.routeName:
                       return const BookAddView();
                     default:

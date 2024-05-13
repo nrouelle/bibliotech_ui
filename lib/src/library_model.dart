@@ -6,6 +6,8 @@ import 'package:ma_biblio/src/library/book.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
+import 'package:uuid/uuid.dart';
+
 class LibraryModel extends ChangeNotifier {
   List<Book> _books = [];
 
@@ -15,6 +17,7 @@ class LibraryModel extends ChangeNotifier {
   List<Book> get books => _books;
 
   Future<void> add(Book book) async {
+    book.uid = const Uuid().v4();
     _books.add(book);
     var file = await _localFile;
 
@@ -24,8 +27,19 @@ class LibraryModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getLibrary() async {
+  Future<void> setBookAsRead(Book book) async {
+    _books.add(book);
+    var file = await _localFile;
+
+    var jsonLibrary = jsonEncode(_books);
+    await file.writeAsString(jsonLibrary, mode: FileMode.write, flush: true);
+
+    notifyListeners();
+  }
+
+  Future<void> loadLibrary() async {
     try {
+      _books = [];
       var file = await _localFile;
       String jsonLibrary = await file.readAsString();
       if (jsonLibrary.isNotEmpty) {

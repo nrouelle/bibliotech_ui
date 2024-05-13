@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ma_biblio/src/library/book.dart';
-import 'package:ma_biblio/src/library/library_controller.dart';
-import 'package:ma_biblio/src/library/library_service.dart';
 import 'package:ma_biblio/src/library_model.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +80,8 @@ class BookAddForm extends State<BookAddView> {
                                 // you'd often call a server or save the information in a database.
                                 _addFormKey.currentState?.save();
 
-                                library.add(Book(title, author, null, false));
+                                library
+                                    .add(Book('', title, author, null, false));
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Enregistré !')),

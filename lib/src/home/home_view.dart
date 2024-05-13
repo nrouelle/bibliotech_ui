@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ma_biblio/src/home/widgets/home_widget.dart';
 import 'package:ma_biblio/src/library/library_view.dart';
+import 'package:ma_biblio/src/library_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,10 +15,16 @@ class _HomeViewState extends State<HomeView> {
   int selectedIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    retrieveLibraryData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: <Widget>[const HomeWidget(), const BookListView()][selectedIndex],
+      body: <Widget>[const HomeWidget(), const LibraryView()][selectedIndex],
       bottomNavigationBar: NavigationBar(
           onDestinationSelected: (index) {
             setState(() {
@@ -32,5 +40,9 @@ class _HomeViewState extends State<HomeView> {
             NavigationDestination(icon: Icon(Icons.search), label: 'Recherche'),
           ]),
     );
+  }
+
+  void retrieveLibraryData() async {
+    await Provider.of<LibraryModel>(context, listen: false).loadLibrary();
   }
 }

@@ -8,7 +8,7 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(json['title'] as String, json['author'] as String,
-        DateTime.tryParse(json['readDate']), json['read'] as bool);
+        DateTime.tryParse(json['readDate'].toString()), json['read'] as bool);
   }
 
   Map<String, dynamic> toJson() => {

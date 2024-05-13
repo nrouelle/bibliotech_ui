@@ -7,12 +7,20 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
 class LibraryModel extends ChangeNotifier {
-  final List<Book> _books = [];
+  List<Book> _books = [];
 
+  LibraryModel() {
+    _books = [];
+  }
   List<Book> get books => _books;
 
-  void add(Book book) {
+  Future<void> add(Book book) async {
     _books.add(book);
+    var file = await _localFile;
+
+    var jsonLibrary = jsonEncode(_books);
+    await file.writeAsString(jsonLibrary, mode: FileMode.write, flush: true);
+
     notifyListeners();
   }
 
@@ -20,12 +28,14 @@ class LibraryModel extends ChangeNotifier {
     try {
       var file = await _localFile;
       String jsonLibrary = await file.readAsString();
-      final dynamic list = json.decode(jsonLibrary);
+      if (jsonLibrary.isNotEmpty) {
+        final dynamic list = json.decode(jsonLibrary);
 
-      for (int i = 0; i < list.length; i++) {
-        _books.add(Book.fromJson(list[i]));
+        for (int i = 0; i < list.length; i++) {
+          _books.add(Book.fromJson(list[i]));
+        }
       }
-      // notifyListeners();
+      notifyListeners();
       // books = List<Book>.from(list.map((book) => Book.fromJson(book)));
     } on Exception catch (ex) {
       throw Exception('Failed to load data');

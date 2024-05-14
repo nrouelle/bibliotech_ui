@@ -31,26 +31,39 @@ class _LibraryViewState extends State<LibraryView> {
                 itemCount: library.books.length,
                 itemBuilder: (context, index) {
                   Book book = library.books[index];
-                  return GestureDetector(
-                    child: BookItem(
-                      title: book.title,
-                      author: book.author,
-                    ),
-                    onTap: () {
-                      // push navigation to details
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                BooksDetailView(book: library.books[index])),
-                      );
+                  return Dismissible(
+                    key: Key(book.uid),
+                    onDismissed: (direction) {
+                      removeBook(book);
                     },
+                    background: Container(
+                      color: Colors.red,
+                    ),
+                    child: GestureDetector(
+                      child: BookItem(
+                        title: book.title,
+                        author: book.author,
+                      ),
+                      onTap: () {
+                        // push navigation to details
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BooksDetailView(book: library.books[index])),
+                        );
+                      },
+                    ),
                   );
                 });
           },
         )),
       ],
     );
+  }
+
+  void removeBook(Book book) async {
+    await Provider.of<LibraryModel>(context, listen: false).removeBook(book);
   }
 }
 

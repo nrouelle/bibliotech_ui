@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -37,6 +36,16 @@ class LibraryModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> removeBook(Book book) async {
+    _books.remove(book);
+    var file = await _localFile;
+
+    var jsonLibrary = jsonEncode(_books);
+    await file.writeAsString(jsonLibrary, mode: FileMode.write, flush: true);
+
+    notifyListeners();
+  }
+
   Future<void> loadLibrary() async {
     try {
       _books = [];
@@ -50,7 +59,6 @@ class LibraryModel extends ChangeNotifier {
         }
       }
       notifyListeners();
-      // books = List<Book>.from(list.map((book) => Book.fromJson(book)));
     } on Exception catch (ex) {
       throw Exception('Failed to load data');
     }

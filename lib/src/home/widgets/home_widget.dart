@@ -230,7 +230,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         const SizedBox(
           height: 15,
         ),
-        Container(
+        SizedBox(
           width: availableScreenWidth * .31,
           child: Text(
             overflow: TextOverflow.ellipsis,

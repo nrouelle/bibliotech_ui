@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ma_biblio/src/library/library_header.dart';
 import 'package:ma_biblio/src/library_model.dart';
 import 'package:provider/provider.dart';
@@ -31,14 +32,20 @@ class _LibraryViewState extends State<LibraryView> {
                 itemCount: library.books.length,
                 itemBuilder: (context, index) {
                   Book book = library.books[index];
-                  return Dismissible(
+                  return Slidable(
                     key: Key(book.uid),
-                    onDismissed: (direction) {
-                      removeBook(book);
-                    },
-                    background: Container(
-                      color: Colors.red,
-                    ),
+                    endActionPane:
+                        ActionPane(motion: ScrollMotion(), children: [
+                      SlidableAction(
+                        onPressed: (context) {
+                          removeBook(book);
+                        },
+                        backgroundColor: const Color.fromARGB(255, 233, 51, 10),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: 'Delete',
+                      ),
+                    ]),
                     child: GestureDetector(
                       child: BookItem(
                         title: book.title,
@@ -64,6 +71,7 @@ class _LibraryViewState extends State<LibraryView> {
 
   void removeBook(Book book) async {
     await Provider.of<LibraryModel>(context, listen: false).removeBook(book);
+    print('${book.title} deleted');
   }
 }
 

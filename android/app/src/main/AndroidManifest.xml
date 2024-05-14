@@ -2,7 +2,7 @@
     <application
         android:label="ma_biblio"
         android:name="${applicationName}"
-        android:icon="@mipmap/mabiblio">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

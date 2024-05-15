@@ -61,18 +61,7 @@ class BiblioApp extends StatelessWidget {
             // Define a light and dark color theme. Then, read the user's
             // preferred ThemeMode (light, dark, or system default) from the
             // SettingsController to display the correct theme.
-            theme: ThemeData(
-                primarySwatch: Colors.blue,
-                scaffoldBackgroundColor: Colors.grey.shade100,
-                textTheme:
-                    const TextTheme(titleLarge: TextStyle(color: Colors.black)),
-                elevatedButtonTheme: ElevatedButtonThemeData(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white),
-                ),
-                navigationBarTheme:
-                    NavigationBarThemeData(backgroundColor: Colors.blue[300])),
+            theme: lightThemeData(context),
             darkTheme: ThemeData.dark(),
             themeMode: settingsController.themeMode,
 
@@ -104,12 +93,24 @@ class BiblioApp extends StatelessWidget {
 
 // light Theme
 ThemeData lightThemeData(BuildContext context) {
+  const ColorScheme lightColorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: Color.fromARGB(255, 23, 126, 137),
+      onPrimary: Colors.white,
+      secondary: Color.fromARGB(255, 8, 76, 97),
+      onSecondary: Colors.white,
+      error: Color.fromARGB(255, 219, 58, 52),
+      onError: Colors.black,
+      background: Color.fromARGB(230, 225, 230, 225),
+      onBackground: Color.fromARGB(255, 8, 76, 97),
+      surface: Color.fromARGB(30, 255, 200, 87),
+      onSurface: Colors.black);
   return ThemeData.light().copyWith(
-      primaryColor: Colors.blue,
-      colorScheme: ColorScheme.fromSwatch(),
+      colorScheme: lightColorScheme,
       textTheme: const TextTheme(
-          titleLarge:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black)));
+          titleLarge: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 8, 76, 97))));
 }
 
 // // dark Theme

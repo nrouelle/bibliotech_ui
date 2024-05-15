@@ -11,11 +11,11 @@ class Header extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
       alignment: Alignment.center,
       height: 170,
-      decoration: BoxDecoration(color: Colors.blue.shade600),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Text(
@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               )
             ],
@@ -109,11 +109,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                       text: "7/50",
                       style: Theme.of(context).textTheme.labelMedium)
                 ])),
-            const Text("Upgrade",
+            Text("Upgrade",
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue)),
+                    color: Theme.of(context).colorScheme.secondary)),
           ]),
         ),
         const SizedBox(
@@ -223,7 +223,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             width: availableScreenWidth * .31,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.grey.shade300,
+              color: Theme.of(context).colorScheme.surface,
             ),
             height: 110,
             child: Image.asset('assets/images/icone_livre_256.png')),

@@ -23,16 +23,17 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: <Widget>[const HomeWidget(), const LibraryView()][selectedIndex],
       bottomNavigationBar: NavigationBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           onDestinationSelected: (index) {
             setState(() {
               selectedIndex = index;
             });
           },
           selectedIndex: selectedIndex,
-          indicatorColor: Colors.blue[100],
+          indicatorColor: Theme.of(context).colorScheme.onBackground,
           destinations: const <Widget>[
             NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
             NavigationDestination(

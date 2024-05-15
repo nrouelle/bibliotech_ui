@@ -9,11 +9,12 @@ class LibraryHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
       alignment: Alignment.center,
       height: 170,
-      decoration: BoxDecoration(color: Colors.blue.shade600),
+      decoration:
+          BoxDecoration(color: Theme.of(context).colorScheme.background),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -22,7 +23,7 @@ class LibraryHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               ),
               Text(
@@ -30,7 +31,7 @@ class LibraryHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               )
             ],
@@ -45,7 +46,6 @@ class LibraryHeader extends StatelessWidget {
                 icon: const Icon(
                   Icons.search,
                   size: 28,
-                  color: Colors.white,
                 ),
                 onPressed: () {},
               ),
@@ -62,7 +62,6 @@ class LibraryHeader extends StatelessWidget {
                 icon: const Icon(
                   Icons.add,
                   size: 28,
-                  color: Colors.white,
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/book/add');

@@ -103,10 +103,12 @@ ThemeData lightThemeData(BuildContext context) {
       onError: Colors.black,
       background: Color.fromARGB(230, 225, 230, 225),
       onBackground: Color.fromARGB(255, 8, 76, 97),
-      surface: Color.fromARGB(30, 255, 200, 87),
-      onSurface: Colors.black);
+      surface: Color.fromARGB(100, 23, 126, 137),
+      onSurface: Color.fromARGB(255, 8, 76, 97));
   return ThemeData.light().copyWith(
       colorScheme: lightColorScheme,
+      canvasColor: lightColorScheme.background,
+      scaffoldBackgroundColor: lightColorScheme.background,
       textTheme: const TextTheme(
           titleLarge: TextStyle(
               fontWeight: FontWeight.bold,

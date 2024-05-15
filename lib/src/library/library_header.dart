@@ -9,8 +9,7 @@ class LibraryHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
       alignment: Alignment.center,
       height: 170,
-      decoration:
-          BoxDecoration(color: Theme.of(context).colorScheme.background),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,7 +22,7 @@ class LibraryHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Text(
@@ -31,7 +30,7 @@ class LibraryHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               )
             ],
@@ -43,10 +42,8 @@ class LibraryHeader extends StatelessWidget {
                 color: Colors.black.withOpacity(.1),
               ),
               child: IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  size: 28,
-                ),
+                icon: Icon(Icons.search,
+                    size: 28, color: Theme.of(context).colorScheme.onPrimary),
                 onPressed: () {},
               ),
             ),
@@ -59,9 +56,10 @@ class LibraryHeader extends StatelessWidget {
                 color: Colors.black.withOpacity(.1),
               ),
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.add,
                   size: 28,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/book/add');

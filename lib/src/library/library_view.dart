@@ -47,9 +47,19 @@ class _LibraryViewState extends State<LibraryView> {
                       ),
                     ]),
                     child: GestureDetector(
-                      child: BookItem(
-                        title: book.title,
-                        author: book.author,
+                      child: ListTile(
+                        title: Text(
+                          book.title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        subtitle: Text(book.author),
+                        tileColor:
+                            Theme.of(context).colorScheme.primary.withAlpha(80),
+                        shape: Border(
+                            bottom: BorderSide(
+                                color: Theme.of(context).colorScheme.primary,
+                                width: 2)),
                       ),
                       onTap: () {
                         // push navigation to details

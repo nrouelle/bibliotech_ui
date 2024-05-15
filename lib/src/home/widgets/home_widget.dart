@@ -44,10 +44,10 @@ class Header extends StatelessWidget {
                 color: Colors.black.withOpacity(.1),
               ),
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.search,
                   size: 28,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 onPressed: () {},
               ),
@@ -61,10 +61,10 @@ class Header extends StatelessWidget {
                 color: Colors.black.withOpacity(.1),
               ),
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.notifications,
                   size: 28,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 onPressed: () {},
               ),
@@ -98,23 +98,31 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            RichText(
-                text: TextSpan(
-                    text: "Livres",
-                    style: Theme.of(context).textTheme.titleLarge,
-                    children: [
-                  TextSpan(
-                      text: "7/50",
-                      style: Theme.of(context).textTheme.labelMedium)
-                ])),
-            Text("Upgrade",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text("Livres",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary)),
+                  const SizedBox(width: 10),
+                  Text("7/35",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary)),
+                ],
+              ),
+              Text("Upgrade",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.secondary))
+            ],
+          ),
         ),
         const SizedBox(
           height: 25,
@@ -195,7 +203,8 @@ class _HomeWidgetState extends State<HomeWidget> {
       height: 65,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-          color: Colors.grey.shade200, borderRadius: BorderRadius.circular(15)),
+          color: Theme.of(context).colorScheme.primary.withAlpha(90),
+          borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -263,7 +272,8 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         Text(
           title,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
         ),
       ],
     );

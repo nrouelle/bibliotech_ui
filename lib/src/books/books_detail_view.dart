@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../library/book.dart';
 
 class BooksDetailView extends StatelessWidget {
@@ -16,18 +17,22 @@ class BooksDetailView extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const ImageSection(imageUrl: 'https://picsum.photos/350/250'),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(book.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 24)),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.blue[600],
+                      foregroundColor: Colors.white,
+                      child: Text(book.title[0]),
+                    ),
+                    Text(book.title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 36)),
+                  ],
+                ),
               ),
-              Text(
-                book.author,
-                style: const TextStyle(fontSize: 18),
-              ),
-              Text(book.readDate.toString()),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -35,14 +40,19 @@ class BooksDetailView extends StatelessWidget {
                     IconButton(
                       icon: const Icon(
                         Icons.done,
-                        weight: 300,
+                        size: 50.0,
                       ),
+                      color: ThemeData().primaryColor,
                       onPressed: () {
                         // Mark book as read
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.share),
+                      icon: const Icon(
+                        Icons.share,
+                        size: 50.0,
+                      ),
+                      color: ThemeData().primaryColor,
                       onPressed: () {
                         // Share book information
                       },
@@ -50,6 +60,13 @@ class BooksDetailView extends StatelessWidget {
                   ],
                 ),
               ),
+              Text(
+                book.author,
+                style: const TextStyle(fontSize: 18),
+              ),
+              (book.readDate != null)
+                  ? Text(DateFormat.yMMM().format(book.readDate!))
+                  : const Text("Non lu"),
             ],
           ),
         ),

@@ -35,7 +35,7 @@ class _LibraryViewState extends State<LibraryView> {
                   return Slidable(
                     key: Key(book.uid),
                     endActionPane:
-                        ActionPane(motion: ScrollMotion(), children: [
+                        ActionPane(motion: const ScrollMotion(), children: [
                       SlidableAction(
                         onPressed: (context) {
                           removeBook(book);
@@ -71,7 +71,6 @@ class _LibraryViewState extends State<LibraryView> {
 
   void removeBook(Book book) async {
     await Provider.of<LibraryModel>(context, listen: false).removeBook(book);
-    print('${book.title} deleted');
   }
 }
 

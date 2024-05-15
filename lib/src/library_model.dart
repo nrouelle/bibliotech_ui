@@ -47,21 +47,18 @@ class LibraryModel extends ChangeNotifier {
   }
 
   Future<void> loadLibrary() async {
-    try {
-      _books = [];
-      var file = await _localFile;
-      String jsonLibrary = await file.readAsString();
-      if (jsonLibrary.isNotEmpty) {
-        final dynamic list = json.decode(jsonLibrary);
+    _books = [];
+    var file = await _localFile;
 
-        for (int i = 0; i < list.length; i++) {
-          _books.add(Book.fromJson(list[i]));
-        }
+    String jsonLibrary = await file.readAsString();
+    if (jsonLibrary.isNotEmpty) {
+      final dynamic list = json.decode(jsonLibrary);
+
+      for (int i = 0; i < list.length; i++) {
+        _books.add(Book.fromJson(list[i]));
       }
-      notifyListeners();
-    } on Exception catch (ex) {
-      throw Exception('Failed to load data');
     }
+    notifyListeners();
   }
 
   Future<String> get _localPath async {
@@ -75,7 +72,7 @@ class LibraryModel extends ChangeNotifier {
     var file = File('$path/myLib.json');
     bool doesFileExists = await file.exists();
     if (!doesFileExists) {
-      file.create();
+      await file.create();
     }
     return file;
   }
